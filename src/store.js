@@ -84,8 +84,14 @@ class Store {
       ...this.state,
       list: this.state.list.filter((item) => {
         if (item.key) {
+          this.startMassiv = this.startMassiv.filter((item) => {
+            return item !== code;
+          });
           return item.key !== code;
         }
+        this.startMassiv = this.startMassiv.filter((item) => {
+          return item !== code;
+        });
         return item.code !== code;
       }),
     });
@@ -96,6 +102,7 @@ class Store {
    * @param code
    */
   selectItem(code) {
+    console.log(this.startMassiv);
     this.setState({
       ...this.state,
       list: this.state.list.map((item) => {
