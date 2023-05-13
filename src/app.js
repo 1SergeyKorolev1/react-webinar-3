@@ -36,7 +36,7 @@ function App({ store }) {
                   <div className="Item-code">{item.code}</div>
                   <div className="Item-title">{item.title}</div>
                   <div className="Item-count">
-                    {item.count === 0 ? "" : `|  Выделяли ${item.count} раз(а)`}
+                    {item.count === 0 ? "" : `|  Выделяли ${item.count} раз`}
                   </div>
                 </div>
                 <div className="Item-actions">
