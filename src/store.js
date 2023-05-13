@@ -102,7 +102,7 @@ class Store {
    * @param code
    */
   selectItem(code) {
-    console.log(this.startMassiv);
+    // console.log(this.startMassiv);
     this.setState({
       ...this.state,
       list: this.state.list.map((item) => {
@@ -110,6 +110,11 @@ class Store {
           item.selected = !item.selected;
           if (item.selected) {
             item.count += 1;
+          }
+        } else if (item.key !== code || item.code !== code) {
+          if (item.selected) {
+            console.log(item);
+            item.selected = !item.selected;
           }
         }
         return item;
