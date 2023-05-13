@@ -50,7 +50,10 @@ body {
 }
 
 .Item-count {
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
+  width: max-content;
   padding: 20px 10px 20px 20px;
 }
 
@@ -70,4 +73,5 @@ body {
 
 .Item-group {
   display: flex;
+  min-width: 100px;
 }
