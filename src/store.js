@@ -67,7 +67,10 @@ class Store {
         ...this.state.list,
         {
           count: 0,
-          code: this.state.list[this.state.list.length - 1].code + 1,
+          code:
+            this.state.list.length !== 0
+              ? this.state.list[this.state.list.length - 1].code + 1
+              : 1,
           title: "Новая запись",
           key: this.addkey(),
         },
