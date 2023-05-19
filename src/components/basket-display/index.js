@@ -4,7 +4,7 @@ import { plural } from "../../utils";
 import "./style.css";
 
 function BasketDisplay({ price, productList, setOpen, quantity }) {
-  console.log(quantity);
+  // console.log(quantity);
   if (price === 0) {
     return (
       <div className="Basket-Display">

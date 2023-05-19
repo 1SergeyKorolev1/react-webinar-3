@@ -76,7 +76,7 @@ class Store {
     // console.log(this.basketList.some((el) => el.code === item.code));
     if (this.basketList.length === 0) {
       this.basketList[this.basketList.length] = item;
-      console.log(this.basketList.length);
+      // console.log(this.basketList.length);
     } else if (this.basketList.some((el) => el.code === item.code)) {
       this.basketList = this.basketList.map((el) => {
         if (el.code === item.code) {

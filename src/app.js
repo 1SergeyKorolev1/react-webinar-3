@@ -24,7 +24,6 @@ function App({ store }) {
     store.addEntryInBasket(item, price);
     setProductList(store.getBasketList());
     seqQuantity(productList.length);
-    console.log(productList);
   }
 
   function setOpen() {
