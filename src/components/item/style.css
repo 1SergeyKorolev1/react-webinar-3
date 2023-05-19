@@ -23,3 +23,12 @@
   justify-content: flex-end;
   padding: 20px 20px 20px 10px;
 }
+
+.Item-price {
+  white-space: nowrap;
+  margin: auto 0;
+}
+.Item-quantity {
+  white-space: nowrap;
+  margin: auto 24px auto 62px;
+}

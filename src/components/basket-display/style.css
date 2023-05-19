@@ -1,0 +1,30 @@
+.Basket-Display {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 21px;
+}
+
+.Basket-Display__title_style-one {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  margin-right: 15px;
+}
+
+.Basket-Display__title_style-two {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  margin-left: 3px;
+}
+
+.Basket-Display__button {
+  width: 80px;
+  max-height: 21px;
+  margin: auto 0;
+  margin-left: 20px;
+}

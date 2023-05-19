@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {plural} from "../../utils";
-import './style.css';
+import { plural } from "../../utils";
+import "./style.css";
 
-function Item(props){
-
+function Item(props) {
   // Счётчик выделений
   const [count, setCount] = useState(0);
+  // console.log(props.check);
 
   const callbacks = {
     onClick: () => {
@@ -18,23 +18,67 @@ function Item(props){
     onDelete: (e) => {
       e.stopPropagation();
       props.onDelete(props.item.code);
-    }
-  }
+    },
+    onAddInBasket: (e) => {
+      e.stopPropagation();
+      props.onAddInBasket(props.item);
+    },
+    onDeleteInBasket: (e) => {
+      e.stopPropagation();
+      props.onDeleteInBasket(props.item);
+    },
+  };
 
-  return (
-    <div className={'Item' + (props.item.selected ? ' Item_selected' : '')}
-         onClick={callbacks.onClick}>
-      <div className='Item-code'>{props.item.code}</div>
-      <div className='Item-title'>
-        {props.item.title} {count ? ` | Выделяли ${count} ${plural(count, {one: 'раз', few: 'раза', many: 'раз'})}` : ''}
+  if (props.check) {
+    return (
+      <div
+        className="Item"
+        // className={"Item" + (props.item.selected ? " Item_selected" : "")}
+        // onClick={callbacks.onClick}
+      >
+        <div className="Item-code">{props.item.code}</div>
+        <div className="Item-title">
+          {props.item.title}{" "}
+          {/* {count
+            ? ` | Выделяли ${count} ${plural(count, {
+                one: "раз",
+                few: "раза",
+                many: "раз",
+              })}`
+            : ""} */}
+        </div>
+        <div className="Item-price">{`${props.item.price} ₽`}</div>
+        <div className="Item-quantity">{`${props.item.quantity} шт.`}</div>
+        <div className="Item-actions">
+          <button onClick={callbacks.onDeleteInBasket}>Удалить</button>
+        </div>
       </div>
-      <div className='Item-actions'>
-        <button onClick={callbacks.onDelete}>
-          Удалить
-        </button>
+    );
+  } else {
+    return (
+      <div
+        className="Item"
+        // className={"Item" + (props.item.selected ? " Item_selected" : "")}
+        // onClick={callbacks.onClick}
+      >
+        <div className="Item-code">{props.item.code}</div>
+        <div className="Item-title">
+          {props.item.title}{" "}
+          {/* {count
+            ? ` | Выделяли ${count} ${plural(count, {
+                one: "раз",
+                few: "раза",
+                many: "раз",
+              })}`
+            : ""} */}
+        </div>
+        <div className="Item-price">{`${props.item.price} ₽`}</div>
+        <div className="Item-actions">
+          <button onClick={callbacks.onAddInBasket}>Добавить</button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 Item.propTypes = {
@@ -42,15 +86,15 @@ Item.propTypes = {
     code: PropTypes.number,
     title: PropTypes.string,
     selected: PropTypes.bool,
-    count: PropTypes.number
+    count: PropTypes.number,
   }).isRequired,
   onDelete: PropTypes.func,
-  onSelect: PropTypes.func
+  onSelect: PropTypes.func,
 };
 
 Item.defaultProps = {
   onDelete: () => {},
   onSelect: () => {},
-}
+};
 
 export default React.memo(Item);
