@@ -17,12 +17,14 @@ function App({ store }) {
   const [price, setPrice] = React.useState(Number);
   const [productList, setProductList] = React.useState([]);
   const [isOpen, setIsOpen] = React.useState(false);
+  const [quantity, seqQuantity] = React.useState(Number);
 
   function onAddInBasket(item) {
     setPrice(price + item.price);
     store.addEntryInBasket(item, price);
     setProductList(store.getBasketList());
-    // console.log(productList);
+    seqQuantity(productList.length);
+    console.log(productList);
   }
 
   function setOpen() {
@@ -41,8 +43,13 @@ function App({ store }) {
     }
     store.deleteEntryInBasket(item);
     setProductList(store.getBasketList());
+    seqQuantity(productList.length);
     // console.log(item);
   }
+
+  React.useEffect(() => {
+    seqQuantity(productList.length);
+  }, [productList]);
 
   const callbacks = {
     onDeleteItem: useCallback(
@@ -72,6 +79,7 @@ function App({ store }) {
         price={price}
         productList={productList}
         setOpen={setOpen}
+        quantity={quantity}
       />
       <List
         list={list}
