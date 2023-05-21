@@ -37,7 +37,14 @@ function BasketDisplay({ price, productList, setOpen, quantity }) {
 }
 
 BasketDisplay.propTypes = {
-  price: PropTypes.node,
+  productList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setOpen: PropTypes.func,
+  price: PropTypes.number,
+  quantity: PropTypes.number,
+};
+
+BasketDisplay.defaultProps = {
+  setOpen: () => {},
 };
 
 export default React.memo(BasketDisplay);

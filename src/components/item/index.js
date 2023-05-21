@@ -87,7 +87,9 @@ Item.propTypes = {
     title: PropTypes.string,
     selected: PropTypes.bool,
     count: PropTypes.number,
+    quantity: PropTypes.number,
   }).isRequired,
+  price: PropTypes.number,
   onDelete: PropTypes.func,
   onSelect: PropTypes.func,
 };

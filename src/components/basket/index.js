@@ -52,11 +52,18 @@ Basket.propTypes = {
   ).isRequired,
   onDeleteItem: PropTypes.func,
   onSelectItem: PropTypes.func,
+  price: PropTypes.number,
+  isOpen: PropTypes.bool,
+  title: PropTypes.string,
+  setExit: PropTypes.func,
+  onDeleteInBasket: PropTypes.func,
 };
 
 Basket.defaultProps = {
   onDeleteItem: () => {},
   onSelectItem: () => {},
+  setExit: () => {},
+  onDeleteInBasket: () => {},
 };
 
 export default React.memo(Basket);
