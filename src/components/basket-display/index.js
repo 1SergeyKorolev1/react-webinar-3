@@ -5,7 +5,7 @@ import "./style.css";
 
 function BasketDisplay({ price, productList, setOpen, quantity }) {
   // console.log(quantity);
-  if (price === 0) {
+  if (productList.length === 0) {
     return (
       <div className="Basket-Display">
         <button className="Basket-Display__button" onClick={setOpen}>
@@ -21,7 +21,7 @@ function BasketDisplay({ price, productList, setOpen, quantity }) {
       <button className="Basket-Display__button" onClick={setOpen}>
         Открыть
       </button>
-      <p className="Basket-Display__title_style-two">{price}</p>
+      <p className="Basket-Display__title_style-two">{price} ₽</p>
       <p className="Basket-Display__title_style-two">
         {productList.length}{" "}
         {plural(quantity, {
