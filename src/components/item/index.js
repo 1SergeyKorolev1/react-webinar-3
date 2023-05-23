@@ -47,7 +47,10 @@ function Item(props) {
               })}`
             : ""} */}
         </div>
-        <div className="Item-price">{`${props.item.price}`} &#8381;</div>
+
+        <div className="Item-price">
+          {`${new Intl.NumberFormat("ru-RU").format(props.item.price)}`} &#8381;
+        </div>
         <div className="Item-quantity">{`${props.item.quantity} шт.`}</div>
         <div className="Item-actions">
           <button onClick={callbacks.onDeleteInBasket}>Удалить</button>
@@ -72,7 +75,9 @@ function Item(props) {
               })}`
             : ""} */}
         </div>
-        <div className="Item-price">{`${props.item.price}`} &#8381;</div>
+        <div className="Item-price">
+          {`${new Intl.NumberFormat("ru-RU").format(props.item.price)}`} &#8381;
+        </div>
         <div className="Item-actions">
           <button onClick={callbacks.onAddInBasket}>Добавить</button>
         </div>

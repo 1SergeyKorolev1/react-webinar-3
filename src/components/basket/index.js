@@ -36,7 +36,9 @@ function Basket({
           </div>
         ))}
         <div className="total-container">
-          <div className="Bascet-price">{price} &#8381;</div>
+          <div className="Bascet-price">
+            {new Intl.NumberFormat("ru-RU").format(price)} &#8381;
+          </div>
           <p className="Bascet-total">И того</p>
         </div>
       </div>

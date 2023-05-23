@@ -21,7 +21,9 @@ function BasketDisplay({ price, productList, setOpen, quantity }) {
       <button className="Basket-Display__button" onClick={setOpen}>
         Открыть
       </button>
-      <p className="Basket-Display__title_style-two">{price} &#8381;</p>
+      <p className="Basket-Display__title_style-two">
+        {new Intl.NumberFormat("ru-RU").format(price)} &#8381;
+      </p>
       <p className="Basket-Display__title_style-two">
         {productList.length}{" "}
         {plural(quantity, {
