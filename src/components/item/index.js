@@ -47,7 +47,7 @@ function Item(props) {
               })}`
             : ""} */}
         </div>
-        <div className="Item-price">{`${props.item.price} ₽`}</div>
+        <div className="Item-price">{`${props.item.price}`} &#8381;</div>
         <div className="Item-quantity">{`${props.item.quantity} шт.`}</div>
         <div className="Item-actions">
           <button onClick={callbacks.onDeleteInBasket}>Удалить</button>
@@ -72,7 +72,7 @@ function Item(props) {
               })}`
             : ""} */}
         </div>
-        <div className="Item-price">{`${props.item.price} ₽`}</div>
+        <div className="Item-price">{`${props.item.price}`} &#8381;</div>
         <div className="Item-actions">
           <button onClick={callbacks.onAddInBasket}>Добавить</button>
         </div>
@@ -88,6 +88,7 @@ Item.propTypes = {
     selected: PropTypes.bool,
     count: PropTypes.number,
     quantity: PropTypes.number,
+    price: PropTypes.number,
   }).isRequired,
   price: PropTypes.number,
   onDelete: PropTypes.func,

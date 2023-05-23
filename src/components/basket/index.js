@@ -36,7 +36,7 @@ function Basket({
           </div>
         ))}
         <div className="total-container">
-          <div className="Bascet-price">{price} ₽</div>
+          <div className="Bascet-price">{price} &#8381;</div>
           <p className="Bascet-total">И того</p>
         </div>
       </div>
