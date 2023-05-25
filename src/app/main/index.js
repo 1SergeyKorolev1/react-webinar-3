@@ -7,6 +7,7 @@ import List from "../../components/list";
 import Pagination from "../../components/pagination";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
+import { number } from "prop-types";
 
 function Main() {
   const store = useStore();
@@ -27,6 +28,11 @@ function Main() {
   }));
 
   const callbacks = {
+    // Выделение номера в пагинации
+    highlightNumber: useCallback(
+      (evt) => store.actions.pagination.highlightNumber(evt),
+      [store]
+    ),
     // Добавление в корзину
     addToBasket: useCallback(
       (_id) => store.actions.basket.addToBasket(_id),
@@ -57,6 +63,7 @@ function Main() {
             className={`Pagination-link ${
               number > 9 ? "Pagination-link-big" : ""
             } ${number > 99 ? "Pagination-link-big-1" : ""}`}
+            onClick={callbacks.highlightNumber}
           >
             {number}
           </a>

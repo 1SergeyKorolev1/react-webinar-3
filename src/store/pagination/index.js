@@ -22,6 +22,15 @@ class Pagination extends StoreModule {
       "Добавляем страницы пагинации"
     );
   }
+
+  highlightNumber(evt) {
+    console.log(Number(evt.target.innerHTML));
+    this.store.getState().pagination.number.map((item) => {
+      if (item === Number(evt.target.innerHTML)) {
+        console.log(item);
+      }
+    });
+  }
 }
 
 export default Pagination;
