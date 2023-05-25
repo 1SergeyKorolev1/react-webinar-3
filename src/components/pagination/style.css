@@ -1,0 +1,28 @@
+.Pagination {
+  display: flex;
+  justify-content: end;
+  list-style-type: none;
+  text-decoration: none;
+  margin-right: 22px;
+}
+
+.Pagination-link {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  min-width: 18px;
+  color: #000;
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.Pagination-link-big {
+  min-width: 22px;
+}
+
+.Pagination-link-big-1 {
+  min-width: 28px;
+}
