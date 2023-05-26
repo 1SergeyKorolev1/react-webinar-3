@@ -10,7 +10,10 @@
   text-decoration: none;
   display: flex;
   justify-content: center;
-  min-width: 18px;
+  align-items: center;
+  text-align: center;
+  min-width: 20px;
+  min-height: 20px;
   color: #000;
   font-family: "Arial";
   font-style: normal;
@@ -20,9 +23,18 @@
 }
 
 .Pagination-link-big {
-  min-width: 22px;
+  min-width: 24px;
 }
 
 .Pagination-link-big-1 {
-  min-width: 28px;
+  min-width: 30px;
+}
+
+.Pagination-link-activ {
+  background-color: #0087e9;
+  color: aliceblue;
+}
+
+.Pagination-link-deactiv {
+  pointer-events: none;
 }

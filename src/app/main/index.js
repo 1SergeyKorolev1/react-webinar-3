@@ -12,13 +12,8 @@ import { number } from "prop-types";
 function Main() {
   const store = useStore();
 
-  const [limit, setMit] = React.useState(10);
+  const [limit, setLimit] = React.useState(10);
   const [skip, setSkip] = React.useState(0);
-
-  useEffect(() => {
-    store.actions.catalog.load(limit, skip);
-    store.actions.pagination.addNumber();
-  }, []);
 
   const select = useSelector((state) => ({
     list: state.catalog.list,
@@ -27,10 +22,18 @@ function Main() {
     number: state.pagination.number,
   }));
 
+  useEffect(() => {
+    store.actions.catalog.load(limit, skip);
+    store.actions.pagination.addNumber(select.number);
+  }, [skip]);
+
   const callbacks = {
     // Выделение номера в пагинации
     highlightNumber: useCallback(
-      (evt) => store.actions.pagination.highlightNumber(evt),
+      (evt) => {
+        store.actions.pagination.highlightNumber(evt);
+        setSkip(Number(evt.target.innerHTML) * 10 - 10);
+      },
       [store]
     ),
     // Добавление в корзину
@@ -61,11 +64,13 @@ function Main() {
           <a
             href="#"
             className={`Pagination-link ${
-              number > 9 ? "Pagination-link-big" : ""
-            } ${number > 99 ? "Pagination-link-big-1" : ""}`}
+              number.code > 9 ? "Pagination-link-big" : ""
+            } ${number.code > 99 ? "Pagination-link-big-1" : ""} ${
+              number.selected ? "Pagination-link-activ" : ""
+            } ${number.data === "..." ? "Pagination-link-deactiv" : ""}`}
             onClick={callbacks.highlightNumber}
           >
-            {number}
+            {number.data}
           </a>
         );
       },
