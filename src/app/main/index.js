@@ -62,7 +62,6 @@ function Main() {
       (number) => {
         return (
           <a
-            href="#"
             className={`Pagination-link ${
               number.code > 9 ? "Pagination-link-big" : ""
             } ${number.code > 99 ? "Pagination-link-big-1" : ""} ${

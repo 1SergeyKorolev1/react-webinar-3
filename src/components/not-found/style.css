@@ -1,0 +1,11 @@
+.NotFound {
+  padding-top: 1px;
+  background-color: aliceblue;
+  width: auto;
+  height: 100vh;
+  text-align: center;
+}
+
+.NotFound-button {
+  cursor: pointer;
+}

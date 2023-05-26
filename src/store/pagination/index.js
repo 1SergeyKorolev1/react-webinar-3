@@ -9,7 +9,7 @@ class Pagination extends StoreModule {
   }
 
   addNumber(oldList) {
-    const maxNumber = 25;
+    const maxNumber = 100;
     const newArreyNumber = [];
     let selectedItem = {};
     let finishArreyNumber = [];
