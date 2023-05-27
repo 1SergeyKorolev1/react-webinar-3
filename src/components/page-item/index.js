@@ -15,12 +15,22 @@ function PageItem({ item, onAdd }) {
   if (item.description !== undefined) {
     return (
       <div className={cn()}>
-        <p>{item.description}</p>
-        <p>Страна производитель: {item.madeIn.title}</p>
-        <p>Категория: {item.category.title}</p>
-        <p>Год выпуска: {item.edition}</p>
-        <p>Цена: {item.price}</p>
-        <button onClick={callbacks.onAdd}>Добавить</button>
+        <p className={cn("description")}>{item.description}</p>
+        <p className={cn("description")}>
+          Страна производитель:{" "}
+          <span className={cn("country")}>{item.madeIn.title}</span>
+        </p>
+        <p className={cn("description")}>
+          Категория:{" "}
+          <span className={cn("country")}>{item.category.title}</span>
+        </p>
+        <p className={cn("description")}>
+          Год выпуска: <span className={cn("country")}>{item.edition}</span>
+        </p>
+        <p className={cn("price")}>Цена: {item.price}</p>
+        <button className={cn("button")} onClick={callbacks.onAdd}>
+          Добавить
+        </button>
       </div>
     );
   }

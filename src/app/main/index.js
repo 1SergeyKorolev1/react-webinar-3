@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect } from "react";
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
@@ -14,7 +14,6 @@ import { number } from "prop-types";
 
 function Main() {
   const store = useStore();
-  const { id } = useParams();
 
   const [limit, setLimit] = React.useState(10);
   const [skip, setSkip] = React.useState(0);
@@ -31,10 +30,6 @@ function Main() {
     store.actions.catalog.load(limit, skip);
     store.actions.pagination.addNumber(select.number);
   }, [skip]);
-
-  useEffect(() => {
-    store.actions.catalog.loadItem(id);
-  }, [id]);
 
   const callbacks = {
     onClickTitle: useCallback((item) => {
