@@ -18,6 +18,10 @@ function Basket() {
   console.log(select.list);
 
   const callbacks = {
+    onClickTitle: useCallback((item) => {
+      store.actions.catalog.loadItem(item._id);
+      callbacks.closeModal();
+    }),
     // Удаление из корзины
     removeFromBasket: useCallback(
       (_id) => store.actions.basket.removeFromBasket(_id),
@@ -30,7 +34,13 @@ function Basket() {
   const renders = {
     itemBasket: useCallback(
       (item) => {
-        return <ItemBasket item={item} onRemove={callbacks.removeFromBasket} />;
+        return (
+          <ItemBasket
+            item={item}
+            onRemove={callbacks.removeFromBasket}
+            onClickTitle={callbacks.onClickTitle}
+          />
+        );
       },
       [callbacks.removeFromBasket]
     ),
