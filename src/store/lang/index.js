@@ -10,14 +10,16 @@ class Lang extends StoreModule {
 
   lang() {
     const lang = document.querySelector(".Head-select");
-
-    this.setState(
-      {
-        ...this.getState(),
-        lang: lang.value,
-      },
-      "Переводим сайт на выбранный язык..."
-    );
+    // console.log(lang);
+    if (lang !== null) {
+      this.setState(
+        {
+          ...this.getState(),
+          lang: lang.value,
+        },
+        "Переводим сайт на выбранный язык..."
+      );
+    }
   }
 }
 

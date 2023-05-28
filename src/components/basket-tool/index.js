@@ -12,7 +12,7 @@ function BasketTool({ sum, amount, onOpen, lang }) {
   const handleClick = () => {
     navigate("/");
   };
-  console.log(lang);
+  // console.log(lang);
 
   return (
     <div className={cn()}>

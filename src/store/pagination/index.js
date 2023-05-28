@@ -8,8 +8,9 @@ class Pagination extends StoreModule {
     };
   }
 
-  addNumber(oldList) {
-    const maxNumber = 100;
+  addNumber(oldList, quantityitem) {
+    // console.log(Math.round(quantityitem.count / 10));
+    const maxNumber = Math.round(quantityitem.count / 10);
     const newArreyNumber = [];
     let selectedItem = {};
     let finishArreyNumber = [];

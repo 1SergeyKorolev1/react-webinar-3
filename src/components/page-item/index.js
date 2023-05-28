@@ -1,10 +1,20 @@
 import { memo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { cn as bem } from "@bem-react/classname";
 import "./style.css";
 
-function PageItem({ item, onAdd }) {
+function PageItem({ item, onAdd, lang }) {
+  const navigate = useNavigate();
+  const basketTool = document.querySelector(".BasketTool-total");
+  if (basketTool !== null) {
+    if (basketTool.textContent === "") {
+      navigate("/");
+      location.reload();
+    }
+  }
+
   const cn = bem("Page-item");
   const { id } = useParams();
 
@@ -29,7 +39,7 @@ function PageItem({ item, onAdd }) {
         </p>
         <p className={cn("price")}>Цена: {item.price}</p>
         <button className={cn("button")} onClick={callbacks.onAdd}>
-          Добавить
+          {lang === "Русский" ? "Добавить" : "Add"}
         </button>
       </div>
     );

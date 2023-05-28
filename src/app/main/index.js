@@ -21,6 +21,7 @@ function Main() {
   const select = useSelector((state) => ({
     item: state.catalog.item,
     list: state.catalog.list,
+    quantityitem: state.catalog.quantityitem,
     amount: state.basket.amount,
     sum: state.basket.sum,
     number: state.pagination.number,
@@ -28,8 +29,17 @@ function Main() {
   }));
 
   useEffect(() => {
+    store.actions.pagination.addNumber(select.number, select.quantityitem);
+  }, [select.quantityitem]);
+
+  // useEffect(() => {
+  //   console.log(select.item);
+  // }, [select.item]);
+
+  useEffect(() => {
+    store.actions.catalog.quantityitem();
     store.actions.catalog.load(limit, skip);
-    store.actions.pagination.addNumber(select.number);
+    store.actions.pagination.addNumber(select.number, select.quantityitem);
     store.actions.lang.lang();
   }, [skip]);
 
@@ -105,6 +115,7 @@ function Main() {
             <Head
               title={select.lang === "Русский" ? "Магазин" : "Store"}
               onChoiceLang={callbacks.onChoiceLang}
+              lang={select.lang}
             />
             <BasketTool
               onOpen={callbacks.openModalBasket}
@@ -131,13 +142,19 @@ function Main() {
             <Head
               title={select.item.title}
               onChoiceLang={callbacks.onChoiceLang}
+              lang={select.lang}
             />
             <BasketTool
               onOpen={callbacks.openModalBasket}
               amount={select.amount}
               sum={select.sum}
+              lang={select.lang}
             />
-            <PageItem item={select.item} onAdd={callbacks.addToBasket} />
+            <PageItem
+              item={select.item}
+              onAdd={callbacks.addToBasket}
+              lang={select.lang}
+            />
           </PageLayout>
         }
       />
