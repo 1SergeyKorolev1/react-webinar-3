@@ -1,9 +1,20 @@
 .Head {
   height: 80px;
   background: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Head h1 {
   margin: 0;
   padding: 20px 20px 10px;
+}
+
+.Head-select {
+  min-height: 21px;
+  max-height: 22px;
+  display: block;
+  margin: auto 20px;
+  background-color: rgb(234, 233, 233);
+  border-radius: 3px;
 }

@@ -6,30 +6,44 @@ import { useNavigate } from "react-router-dom";
 import { numberFormat, plural } from "../../utils";
 import "./style.css";
 
-function BasketTool({ sum, amount, onOpen }) {
+function BasketTool({ sum, amount, onOpen, lang }) {
   const cn = bem("BasketTool");
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/");
   };
+  console.log(lang);
 
   return (
     <div className={cn()}>
       <a className="BasketTool-link" onClick={handleClick}>
-        Главная
+        {lang === "Русский" ? "Главная" : "home"}
       </a>
       <div className="BasketTool-container">
-        <span className={cn("label")}>В корзине:</span>
+        <span className={cn("label")}>
+          {lang === "Русский" ? "В корзине" : "In the basket"}:
+        </span>
         <span className={cn("total")}>
-          {amount
+          {amount && lang === "Русский"
             ? `${amount} ${plural(amount, {
                 one: "товар",
                 few: "товара",
                 many: "товаров",
               })} / ${numberFormat(sum)} ₽`
-            : `пусто`}
+            : ""}
+          {amount && lang === "English"
+            ? `${amount} ${plural(amount, {
+                one: "product",
+                few: "products",
+                many: "products",
+              })} / ${numberFormat(sum)} ₽`
+            : ""}
+          {amount === 0 && lang === "Русский" ? "пусто" : ""}
+          {amount === 0 && lang === "English" ? "empty" : ""}
         </span>
-        <button onClick={onOpen}>Перейти</button>
+        <button onClick={onOpen}>
+          {lang === "Русский" ? "Перейти" : "Go"}
+        </button>
       </div>
     </div>
   );

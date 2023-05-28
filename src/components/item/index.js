@@ -25,7 +25,9 @@ function Item(props) {
       </Link>
       <div className={cn("actions")}>
         <div className={cn("price")}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>Добавить</button>
+        <button onClick={callbacks.onAdd}>
+          {props.lang === "Русский" ? "Добавить" : "Add"}
+        </button>
       </div>
     </div>
   );

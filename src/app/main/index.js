@@ -24,14 +24,19 @@ function Main() {
     amount: state.basket.amount,
     sum: state.basket.sum,
     number: state.pagination.number,
+    lang: state.lang.lang,
   }));
 
   useEffect(() => {
     store.actions.catalog.load(limit, skip);
     store.actions.pagination.addNumber(select.number);
+    store.actions.lang.lang();
   }, [skip]);
 
   const callbacks = {
+    // При выборе языка
+    onChoiceLang: useCallback(() => store.actions.lang.lang(), [store]),
+    // При клике по товару
     onClickTitle: useCallback((item) => {
       store.actions.catalog.loadItem(item._id);
     }),
@@ -57,12 +62,13 @@ function Main() {
 
   const renders = {
     item: useCallback(
-      (item) => {
+      (item, lang) => {
         return (
           <Item
             item={item}
             onAdd={callbacks.addToBasket}
             onClickTitle={callbacks.onClickTitle}
+            lang={lang}
           />
         );
       },
@@ -96,13 +102,21 @@ function Main() {
         path="/"
         element={
           <PageLayout>
-            <Head title={"Магазин"} />
+            <Head
+              title={select.lang === "Русский" ? "Магазин" : "Store"}
+              onChoiceLang={callbacks.onChoiceLang}
+            />
             <BasketTool
               onOpen={callbacks.openModalBasket}
               amount={select.amount}
               sum={select.sum}
+              lang={select.lang}
             />
-            <List list={select.list} renderItem={renders.item} />
+            <List
+              list={select.list}
+              renderItem={renders.item}
+              lang={select.lang}
+            />
             <Pagination
               listnumber={select.number}
               rendersPaginationNamber={rendersPaginationNamber.number}
@@ -114,7 +128,10 @@ function Main() {
         path="to/:id"
         element={
           <PageLayout>
-            <Head title={select.item.title} />
+            <Head
+              title={select.item.title}
+              onChoiceLang={callbacks.onChoiceLang}
+            />
             <BasketTool
               onOpen={callbacks.openModalBasket}
               amount={select.amount}
