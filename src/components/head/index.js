@@ -17,9 +17,7 @@ function Head({ title, onChoiceLang, lang }) {
           <h1>{title}</h1>
           <select className={cn("select")} onChange={onChoiceLang}>
             <option>Русский</option>
-            <option selected defaultValue={"English"}>
-              English
-            </option>
+            <option defaultValue={"English"}>English</option>
           </select>
         </div>
       );

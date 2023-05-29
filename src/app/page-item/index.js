@@ -27,17 +27,20 @@ function PageItem({ item, onAdd, lang }) {
       <div className={cn()}>
         <p className={cn("description")}>{item.description}</p>
         <p className={cn("description")}>
-          Страна производитель:{" "}
-          <span className={cn("country")}>{item.madeIn.title}</span>
+          {lang === "Русский" ? "Страна производитель" : "Manufacturer country"}
+          : <span className={cn("country")}>{item.madeIn.title}</span>
         </p>
         <p className={cn("description")}>
-          Категория:{" "}
+          {lang === "Русский" ? "Категория" : "Category"}:{" "}
           <span className={cn("country")}>{item.category.title}</span>
         </p>
         <p className={cn("description")}>
-          Год выпуска: <span className={cn("country")}>{item.edition}</span>
+          {lang === "Русский" ? "Год выпуска" : "Year of issue"}:{" "}
+          <span className={cn("country")}>{item.edition}</span>
         </p>
-        <p className={cn("price")}>Цена: {item.price}</p>
+        <p className={cn("price")}>
+          {lang === "Русский" ? "Цена" : "Price"}: {item.price}
+        </p>
         <button className={cn("button")} onClick={callbacks.onAdd}>
           {lang === "Русский" ? "Добавить" : "Add"}
         </button>

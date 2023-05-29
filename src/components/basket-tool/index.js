@@ -1,5 +1,6 @@
 import React from "react";
 import { memo } from "react";
+import HomeLink from "../home-link";
 import PropTypes from "prop-types";
 import { cn as bem } from "@bem-react/classname";
 import { useNavigate } from "react-router-dom";
@@ -16,9 +17,7 @@ function BasketTool({ sum, amount, onOpen, lang }) {
 
   return (
     <div className={cn()}>
-      <a className="BasketTool-link" onClick={handleClick}>
-        {lang === "Русский" ? "Главная" : "home"}
-      </a>
+      <HomeLink lang={lang} />
       <div className="BasketTool-container">
         <span className={cn("label")}>
           {lang === "Русский" ? "В корзине" : "In the basket"}:

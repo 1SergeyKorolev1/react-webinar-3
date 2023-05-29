@@ -9,6 +9,8 @@ class Catalog extends StoreModule {
 
   initState() {
     return {
+      skip: 0,
+      limit: 10,
       list: [],
       item: {},
       quantityitem: {},
@@ -26,6 +28,16 @@ class Catalog extends StoreModule {
         list: json.result.items,
       },
       "Загружены товары из АПИ"
+    );
+  }
+
+  skip(number) {
+    this.setState(
+      {
+        ...this.getState(),
+        skip: number,
+      },
+      "Изменяем значение Skip"
     );
   }
 

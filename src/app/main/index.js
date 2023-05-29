@@ -6,7 +6,7 @@ import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
 import List from "../../components/list";
 import Pagination from "../../components/pagination";
-import PageItem from "../../components/page-item";
+import PageItem from "../page-item";
 import NotFound from "../../components/not-found";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
@@ -15,11 +15,10 @@ import { number } from "prop-types";
 function Main() {
   const store = useStore();
 
-  const [limit, setLimit] = React.useState(10);
-  const [skip, setSkip] = React.useState(0);
-
   const select = useSelector((state) => ({
     item: state.catalog.item,
+    skip: state.catalog.skip,
+    limit: state.catalog.limit,
     list: state.catalog.list,
     quantityitem: state.catalog.quantityitem,
     amount: state.basket.amount,
@@ -32,16 +31,12 @@ function Main() {
     store.actions.pagination.addNumber(select.number, select.quantityitem);
   }, [select.quantityitem]);
 
-  // useEffect(() => {
-  //   console.log(select.item);
-  // }, [select.item]);
-
   useEffect(() => {
     store.actions.catalog.quantityitem();
-    store.actions.catalog.load(limit, skip);
+    store.actions.catalog.load(select.limit, select.skip);
     store.actions.pagination.addNumber(select.number, select.quantityitem);
     store.actions.lang.lang();
-  }, [skip]);
+  }, [select.skip]);
 
   const callbacks = {
     // При выборе языка
@@ -54,7 +49,7 @@ function Main() {
     highlightNumber: useCallback(
       (evt) => {
         store.actions.pagination.highlightNumber(evt);
-        setSkip(Number(evt.target.innerHTML) * 10 - 10);
+        store.actions.catalog.skip(Number(evt.target.innerHTML) * 10 - 10);
       },
       [store]
     ),
