@@ -1,0 +1,41 @@
+.Login-form {
+  display: flex;
+  margin: 20px;
+  flex-direction: column;
+}
+
+.Login-form-form {
+  display: flex;
+  max-width: 203px;
+  flex-direction: column;
+}
+
+.Login-form-welcome {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.Login-form-label {
+}
+
+.Login-form-input {
+  margin-bottom: 20px;
+}
+
+.Login-form-button {
+  max-width: 53px;
+  cursor: pointer;
+}
+
+.Login-form-error {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  color: #ff0000;
+  margin-top: 0;
+}

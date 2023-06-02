@@ -1,0 +1,29 @@
+.Login-navigate {
+  display: flex;
+  min-height: 41px;
+  flex-direction: row-reverse;
+}
+
+.Login-navigate-button {
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 2px;
+  padding: 2px 8px;
+  text-decoration: none;
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  margin: auto 20px;
+}
+
+.Login-navigate-profile {
+  margin: auto 0;
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  color: #0087e9;
+}
