@@ -8,7 +8,7 @@ function LoginNavigate({ name, t, onClockExit }) {
   if (name) {
     return (
       <div className="Login-navigate">
-        <Link to={"/"} onClick={onClockExit} className="Login-navigate-button">
+        <Link onClick={onClockExit} className="Login-navigate-button">
           {t("Exit")}
         </Link>
         <Link to={"/profile"} className="Login-navigate-profile">

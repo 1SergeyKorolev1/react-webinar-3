@@ -1,5 +1,6 @@
+import React from "react";
 import { memo, useCallback, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import useTranslate from "../../hooks/use-translate";
@@ -15,11 +16,12 @@ import LocaleSelect from "../../containers/locale-select";
 
 function Profile() {
   const store = useStore();
+  let navigate = useNavigate();
 
   const { t } = useTranslate();
 
   function onClockExit() {
-    store.auth.onExit();
+    store.actions.auth.onExit(localStorage.jwt);
   }
 
   const select = useSelector((state) => ({
@@ -28,6 +30,15 @@ function Profile() {
     email: state.auth.email,
     waiting: state.article.waiting,
   }));
+
+  React.useEffect(() => {
+    if (localStorage.jwt) {
+      // console.log(localStorage.jwt);
+      store.actions.auth.checkToken(localStorage.jwt);
+    } else {
+      navigate("/");
+    }
+  }, [select.name]);
 
   return (
     <PageLayout>

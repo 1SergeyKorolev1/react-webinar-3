@@ -1,5 +1,5 @@
+import React from "react";
 import { memo, useCallback, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import useTranslate from "../../hooks/use-translate";
@@ -14,15 +14,20 @@ import LocaleSelect from "../../containers/locale-select";
 
 function Login() {
   const store = useStore();
-  let navigate = useNavigate();
 
   function onClickExit() {
-    store.auth.onExit();
+    store.actions.auth.onExit(localStorage.jwt);
   }
+
+  React.useEffect(() => {
+    if (localStorage.jwt) {
+      // console.log(localStorage.jwt);
+      store.actions.auth.checkToken(localStorage.jwt);
+    }
+  }, []);
 
   function handleAuthorizedUser(data) {
     store.actions.auth.onAuthorize(data.password, data.login);
-    // navigate("/login");
   }
 
   const select = useSelector((state) => ({

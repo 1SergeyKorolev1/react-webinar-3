@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import "./style.css";
 
 function LoginForm({ onAuthorizedUser, t, errorText }) {
-  console.log(errorText);
+  // console.log(errorText);
   const [password, setPassword] = React.useState("");
   const [login, setLogin] = React.useState("");
 

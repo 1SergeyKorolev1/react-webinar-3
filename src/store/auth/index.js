@@ -11,19 +11,61 @@ class Auth extends StoreModule {
     };
   }
 
-  onExit() {
-    localStorage.removeItem("jwt");
-    this.setState(
-      {
-        ...this.getState(),
-        errorText: "",
-        name: "",
-        telephone: "",
-        email: "",
-        waiting: false,
+  checkToken(token) {
+    return fetch(`/api/v1/users/self`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Token": token,
       },
-      "Удаляем данные пользователя"
-    );
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        // console.log(res);
+        if (res.result.profile) {
+          this.setState(
+            {
+              ...this.getState(),
+              errorText: "",
+              name: res.result.profile.name,
+              telephone: res.result.profile.phone,
+              email: res.result.email,
+              waiting: false,
+            },
+            "Получаем данные пользователя при проверке токена"
+          );
+        }
+      });
+  }
+
+  onExit(token) {
+    return fetch(`/api/v1/users/sign`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Token": token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        localStorage.removeItem("jwt");
+        console.log(localStorage);
+        this.setState(
+          {
+            ...this.getState(),
+            errorText: "",
+            name: "",
+            telephone: "",
+            email: "",
+            waiting: false,
+          },
+          "Удаляем данные пользователя"
+        );
+      });
   }
 
   async onAuthorize(password, login) {
@@ -35,46 +77,53 @@ class Auth extends StoreModule {
       waiting: true,
     });
 
-    try {
-      const response = await fetch(`/api/v1/users/sign`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          login: login,
-          password: password,
-        }),
+    return fetch(`/api/v1/users/sign`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        login: login,
+        password: password,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        // console.log(res);
+        if (res.result) {
+          localStorage.setItem("jwt", res.result.token);
+        }
+        if (res.error) {
+          this.setState(
+            {
+              ...this.getState(),
+              errorText: res.error.message,
+              name: "",
+              telephone: "",
+              email: "",
+              waiting: false,
+            },
+            "Получаем данные об ошибке при входе"
+          );
+        } else {
+          this.setState(
+            {
+              ...this.getState(),
+              errorText: "",
+              name: res.result.user.username,
+              telephone: res.result.user.profile.phone,
+              email: res.result.user.email,
+              waiting: false,
+            },
+            "Получаем данные пользователя при входе"
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      const json = await response.json();
-      //   console.log(json.result.token);
-      localStorage.setItem("jwt", json.result.token);
-
-      this.setState(
-        {
-          ...this.getState(),
-          errorText: "",
-          name: json.result.user.username,
-          telephone: json.result.user.profile.phone,
-          email: json.result.user.email,
-          waiting: false,
-        },
-        "Получаем данные пользователя при входе"
-      );
-    } catch (e) {
-      //   console.log(e.message);
-      this.setState(
-        {
-          ...this.getState(),
-          errorText: e.message,
-          name: "",
-          telephone: "",
-          email: "",
-          waiting: false,
-        },
-        "Ошибка при входе"
-      );
-    }
   }
 }
 

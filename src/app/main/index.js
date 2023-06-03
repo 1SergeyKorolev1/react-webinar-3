@@ -1,3 +1,4 @@
+import React from "react";
 import { memo } from "react";
 import useStore from "../../hooks/use-store";
 import useTranslate from "../../hooks/use-translate";
@@ -19,8 +20,15 @@ function Main() {
   }));
 
   function onClickExit() {
-    store.auth.onExit();
+    store.actions.auth.onExit(localStorage.jwt);
   }
+
+  React.useEffect(() => {
+    if (localStorage.jwt) {
+      // console.log(localStorage.jwt);
+      store.actions.auth.checkToken(localStorage.jwt);
+    }
+  }, []);
 
   useInit(
     () => {

@@ -1,3 +1,4 @@
+import React from "react";
 import { memo, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import useStore from "../../hooks/use-store";
@@ -16,8 +17,15 @@ function Article() {
   const store = useStore();
 
   function onClickExit() {
-    store.auth.onExit();
+    store.actions.auth.onExit(localStorage.jwt);
   }
+
+  React.useEffect(() => {
+    if (localStorage.jwt) {
+      // console.log(localStorage.jwt);
+      store.actions.auth.checkToken(localStorage.jwt);
+    }
+  }, []);
 
   // Параметры из пути /articles/:id
   const params = useParams();
