@@ -36,7 +36,7 @@ function Profile() {
       // console.log(localStorage.jwt);
       store.actions.auth.checkToken(localStorage.jwt);
     } else {
-      navigate("/");
+      navigate("/login");
     }
   }, [select.name]);
 
