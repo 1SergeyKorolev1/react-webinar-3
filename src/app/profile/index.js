@@ -34,9 +34,18 @@ function Profile() {
   React.useEffect(() => {
     if (localStorage.jwt) {
       // console.log(localStorage.jwt);
-      store.actions.auth.checkToken(localStorage.jwt);
-    } else {
-      navigate("/login");
+      store.actions.auth
+        .checkToken(localStorage.jwt)
+        .then((res) => {
+          // console.log(res);
+          if (!res.result) {
+            navigate("/login");
+          }
+        })
+        .catch((err) => {
+          // console.log(err);
+          navigate("/login");
+        });
     }
   }, [select.name]);
 

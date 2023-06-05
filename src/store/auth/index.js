@@ -24,7 +24,7 @@ class Auth extends StoreModule {
       })
       .then((res) => {
         // console.log(res);
-        if (res.result.profile) {
+        if (res.result) {
           this.setState(
             {
               ...this.getState(),
@@ -37,6 +37,7 @@ class Auth extends StoreModule {
             "Получаем данные пользователя при проверке токена"
           );
         }
+        return res;
       });
   }
 
