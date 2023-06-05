@@ -99,7 +99,7 @@ class Auth extends StoreModule {
           this.setState(
             {
               ...this.getState(),
-              errorText: res.error.message,
+              errorText: res.error.data.issues[0].message,
               name: "",
               telephone: "",
               email: "",
