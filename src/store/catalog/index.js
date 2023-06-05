@@ -97,25 +97,25 @@ class CatalogState extends StoreModule {
               } else if (
                 index !== -1 &&
                 finishArrey[index].title.startsWith("-") &&
-                !finishArrey[index].title.startsWith("--")
+                !finishArrey[index].title.startsWith("- -")
               ) {
                 finishArrey = [
                   ...finishArrey.slice(0, index + 1),
                   {
                     value: item._id,
-                    title: `-- ${item.title}`,
+                    title: `- - ${item.title}`,
                   },
                   ...finishArrey.slice(index + 1),
                 ];
               } else if (
                 index !== -1 &&
-                finishArrey[index].title.startsWith("--")
+                finishArrey[index].title.startsWith("- -")
               ) {
                 finishArrey = [
                   ...finishArrey.slice(0, index + 1),
                   {
                     value: item._id,
-                    title: `--- ${item.title}`,
+                    title: `- - - ${item.title}`,
                   },
                   ...finishArrey.slice(index + 1),
                 ];
