@@ -1,4 +1,5 @@
 import StoreModule from "../module";
+import { getCategoriesUtils } from "../../utils";
 
 class Categories extends StoreModule {
   initState() {
@@ -19,60 +20,12 @@ class Categories extends StoreModule {
       })
       .then((res) => {
         if (res.result.items) {
-          let finishArrey = [{ value: "", title: "Все" }];
+          const result = getCategoriesUtils(res);
 
-          res.result.items.map((item) => {
-            if (!item.parent) {
-              finishArrey[finishArrey.length] = {
-                value: item._id,
-                title: item.title,
-              };
-            } else {
-              const index = finishArrey.findIndex(
-                (el) => el.value === item.parent._id
-              );
-
-              if (index !== -1 && !finishArrey[index].title.startsWith("-")) {
-                finishArrey = [
-                  ...finishArrey.slice(0, index + 1),
-                  {
-                    value: item._id,
-                    title: `- ${item.title}`,
-                  },
-                  ...finishArrey.slice(index + 1),
-                ];
-              } else if (
-                index !== -1 &&
-                finishArrey[index].title.startsWith("-") &&
-                !finishArrey[index].title.startsWith("- -")
-              ) {
-                finishArrey = [
-                  ...finishArrey.slice(0, index + 1),
-                  {
-                    value: item._id,
-                    title: `- - ${item.title}`,
-                  },
-                  ...finishArrey.slice(index + 1),
-                ];
-              } else if (
-                index !== -1 &&
-                finishArrey[index].title.startsWith("- -")
-              ) {
-                finishArrey = [
-                  ...finishArrey.slice(0, index + 1),
-                  {
-                    value: item._id,
-                    title: `- - - ${item.title}`,
-                  },
-                  ...finishArrey.slice(index + 1),
-                ];
-              }
-            }
-          });
           this.setState(
             {
               ...this.getState(),
-              categories: finishArrey,
+              categories: result,
             },
             "Категории загруженны и установленны в нужном порядке"
           );
