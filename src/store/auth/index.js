@@ -121,9 +121,7 @@ class Auth extends StoreModule {
             "Получаем данные пользователя при входе"
           );
         }
-      })
-      .catch((err) => {
-        console.log(err);
+        return res;
       });
   }
 }

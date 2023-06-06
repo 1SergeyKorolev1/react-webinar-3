@@ -1,5 +1,6 @@
 import React from "react";
 import { memo, useCallback, useMemo } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import useTranslate from "../../hooks/use-translate";
@@ -14,6 +15,7 @@ import LocaleSelect from "../../containers/locale-select";
 
 function Login() {
   const store = useStore();
+  let navigate = useNavigate();
 
   function onClickExit() {
     store.actions.auth.onExit(localStorage.jwt);
@@ -27,7 +29,12 @@ function Login() {
   }, []);
 
   function handleAuthorizedUser(data) {
-    store.actions.auth.onAuthorize(data.password, data.login);
+    store.actions.auth.onAuthorize(data.password, data.login).then((res) => {
+      if (res.result) {
+        navigate(-1);
+        console.log(res);
+      }
+    });
   }
 
   const select = useSelector((state) => ({

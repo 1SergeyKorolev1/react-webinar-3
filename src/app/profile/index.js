@@ -44,8 +44,9 @@ function Profile() {
         })
         .catch((err) => {
           // console.log(err);
-          navigate("/login");
         });
+    } else {
+      navigate("/login");
     }
   }, [select.name]);
 
