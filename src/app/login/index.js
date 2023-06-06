@@ -32,7 +32,7 @@ function Login() {
     store.actions.auth.onAuthorize(data.password, data.login).then((res) => {
       if (res.result) {
         navigate(-1);
-        console.log(res);
+        // console.log(res);
       }
     });
   }
