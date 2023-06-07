@@ -23,8 +23,11 @@ function Login() {
 
   React.useEffect(() => {
     if (localStorage.jwt) {
-      // console.log(localStorage.jwt);
-      store.actions.auth.checkToken(localStorage.jwt);
+      store.actions.auth.checkToken(localStorage.jwt).then((res) => {
+        if (res.result) {
+          navigate(-1);
+        }
+      });
     }
   }, []);
 
@@ -32,7 +35,6 @@ function Login() {
     store.actions.auth.onAuthorize(data.password, data.login).then((res) => {
       if (res.result) {
         navigate(-1);
-        // console.log(res);
       }
     });
   }

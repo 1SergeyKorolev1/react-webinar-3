@@ -19,6 +19,7 @@ class Categories extends StoreModule {
         return res.json();
       })
       .then((res) => {
+        console.log(res);
         if (res.result.items) {
           const result = getCategoriesUtils(res);
 
