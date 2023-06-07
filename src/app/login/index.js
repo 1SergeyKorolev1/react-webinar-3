@@ -23,7 +23,7 @@ function Login() {
 
   React.useEffect(() => {
     if (localStorage.jwt) {
-      store.actions.auth.checkToken(localStorage.jwt).then((res) => {
+      store.actions.profile.checkToken(localStorage.jwt).then((res) => {
         if (res.result) {
           navigate(-1);
         }
@@ -40,7 +40,7 @@ function Login() {
   }
 
   const select = useSelector((state) => ({
-    name: state.auth.name,
+    name: state.profile.name,
     error: state.auth.errorText,
   }));
 

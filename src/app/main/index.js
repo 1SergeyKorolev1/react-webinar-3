@@ -16,17 +16,17 @@ function Main() {
   const store = useStore();
 
   const select = useSelector((state) => ({
-    name: state.auth.name,
+    name: state.profile.name,
   }));
 
   function onClickExit() {
     store.actions.auth.onExit(localStorage.jwt);
+    location.reload();
   }
 
   React.useEffect(() => {
     if (localStorage.jwt) {
-      // console.log(localStorage.jwt);
-      store.actions.auth.checkToken(localStorage.jwt);
+      store.actions.profile.checkToken(localStorage.jwt);
     }
   }, []);
 

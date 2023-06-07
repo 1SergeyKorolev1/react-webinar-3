@@ -22,10 +22,11 @@ function Profile() {
 
   function onClockExit() {
     store.actions.auth.onExit(localStorage.jwt);
+    location.reload();
   }
 
   const select = useSelector((state) => ({
-    name: state.auth.name,
+    name: state.profile.name,
     telephone: state.auth.telephone,
     email: state.auth.email,
     waiting: state.article.waiting,
@@ -34,7 +35,7 @@ function Profile() {
   React.useEffect(() => {
     if (localStorage.jwt) {
       // console.log(localStorage.jwt);
-      store.actions.auth
+      store.actions.profile
         .checkToken(localStorage.jwt)
         .then((res) => {
           // console.log(res);
